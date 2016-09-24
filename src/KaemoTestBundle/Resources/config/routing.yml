@@ -1,0 +1,12 @@
+kaemo_test_movies_list:
+    path:     /videos.{_format}
+    defaults: { _controller: KaemoTestBundle:Movie:listMovies, _format: "json" }
+    requirements:
+        _format: json|yml|xml
+
+kaemo_test_movie:
+    path:     /video/{id}.{_format}
+    defaults: { _controller: KaemoTestBundle:Movie:movie, _format: "json" }
+    requirements:
+        id: \d+
+        _format: json|yml|xml
