@@ -1,7 +1,7 @@
 services:
     kaemo_import_command:
       class: KaemoTestBundle\Command\ImportMoviesCommand
-      arguments: ['@doctrine', %xml_path%, '@logger']
+      arguments: ['@doctrine', '%xml_path%', '@logger']
       tags:
           - { name: console.command }
 
