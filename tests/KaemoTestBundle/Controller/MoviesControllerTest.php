@@ -3,16 +3,26 @@
 namespace KaemoTestBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase as WebTestCase;
+use Doctrine\ORM\Tools\SchemaTool;
 
 class MoviesControllerTest extends WebTestCase
 {
     public function setUp()
     {
-        $this->auth = array(
-            'PHP_AUTH_USER' => 'user',
-            'PHP_AUTH_PW'   => 'userpass',
-        );
-        $this->client = static::createClient(array(), $this->auth);
+        $this->client = static::createClient(array());
+        $this->verbosityLevel = 'verbose';
+        $this->decorated = false;
+        //réinitialise la base
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        if (!isset($metadatas)) {
+            $metadatas = $em->getMetadataFactory()->getAllMetadata();
+        }
+        $schemaTool = new SchemaTool($em);
+        $schemaTool->dropDatabase();
+        if (!empty($metadatas)) {
+            $schemaTool->createSchema($metadatas);
+        }
+        $this->runCommand('kaemo:movie:import');
     }
 
     public function testListMovies()
@@ -32,6 +42,46 @@ class MoviesControllerTest extends WebTestCase
             $this->assertTrue(isset($video['realisator']));
         }
         $this->assertEquals(count($decoded['videos']), $decoded['count']);
+        $this->assertEquals(10, $decoded['count']);
+    }
+
+    public function testSearchMovies()
+    {
+        $route =  $this->getUrl('kaemo_test_movies_list', array('_format' => 'json', 'realisator'=>"Nolan", "from"=>"20100101", "to"=>"20150101"));
+        $this->client->request('GET', $route);
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, 200);
+        $content = $response->getContent();
+
+        $decoded = json_decode($content, true);
+        $this->assertTrue(isset($decoded['count']));
+        $this->assertTrue(isset($decoded['videos']));
+        $this->assertEquals(count($decoded['videos']), $decoded['count']);
+        $this->assertEquals(2, $decoded['count']);
+
+        $route =  $this->getUrl('kaemo_test_movies_list', array('_format' => 'json', "from"=>"20100101", "to"=>"20150101"));
+        $this->client->request('GET', $route);
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, 200);
+        $content = $response->getContent();
+
+        $decoded = json_decode($content, true);
+        $this->assertTrue(isset($decoded['count']));
+        $this->assertTrue(isset($decoded['videos']));
+        $this->assertEquals(count($decoded['videos']), $decoded['count']);
+        $this->assertEquals(3, $decoded['count']);
+
+        $route =  $this->getUrl('kaemo_test_movies_list', array('_format' => 'json', "from"=>"20000101"));
+        $this->client->request('GET', $route);
+        $response = $this->client->getResponse();
+        $this->assertJsonResponse($response, 200);
+        $content = $response->getContent();
+
+        $decoded = json_decode($content, true);
+        $this->assertTrue(isset($decoded['count']));
+        $this->assertTrue(isset($decoded['videos']));
+        $this->assertEquals(count($decoded['videos']), $decoded['count']);
+        $this->assertEquals(6, $decoded['count']);
     }
 
     public function testMovie()

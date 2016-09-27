@@ -49,7 +49,7 @@ class ImportMoviesCommand extends Command
                 $movie = new Movie();
                 $movie->setTitle($movie_xml->title);
                 $date = \DateTime::createFromFormat('d/m/Y', $movie_xml->date); 
-                $date->setTime(0,0,0);
+                $date->modify('midnight');
                 $movie->setDate($date);
                 $movie->setRealisator($movie_xml->realisator);
                 $this->em->persist($movie);

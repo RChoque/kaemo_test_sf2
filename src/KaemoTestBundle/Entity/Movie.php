@@ -33,7 +33,7 @@ class Movie
      * @var string
      *
      * @ORM\Column(name="date", type="datetime", nullable=true)
-     * @Type("DateTime<'Y-m-d h:m:s'>")
+     * @Type("DateTime<'Y-m-d H:i:s'>")
      */
     private $date;
 
