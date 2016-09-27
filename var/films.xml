@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<films>
+  <film>
+     <title><![CDATA[La Ligne verte]]></title>
+     <date><![CDATA[01/03/2000]]></date>
+     <realisator><![CDATA[Frank Darabont]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Django Unchained]]></title>
+     <date><![CDATA[16/01/2013]]></date>
+     <realisator><![CDATA[Quentin Tarantino]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Gran Torino]]></title>
+     <date><![CDATA[25/02/2009]]></date>
+     <realisator><![CDATA[Clint Eastwood]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Fight Club]]></title>
+     <date><![CDATA[10/11/1999]]></date>
+     <realisator><![CDATA[David Fincher]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Les Evadés]]></title>
+     <date><![CDATA[01/03/1995]]></date>
+     <realisator><![CDATA[Frank Darabont]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Interstellar]]></title>
+     <date><![CDATA[05/11/2014]]></date>
+     <realisator><![CDATA[Christopher Nolan]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Gladiator]]></title>
+     <date><![CDATA[20/06/2000]]></date>
+     <realisator><![CDATA[Ridley Scott]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Inception]]></title>
+     <date><![CDATA[21/07/2010]]></date>
+     <realisator><![CDATA[Christopher Nolan]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Seven]]></title>
+     <date><![CDATA[31/01/1996]]></date>
+     <realisator><![CDATA[David Fincher]]></realisator>
+  </film>
+  <film>
+     <title><![CDATA[Retour vers le futur]]></title>
+     <date><![CDATA[30/10/1985]]></date>
+     <realisator><![CDATA[Robert Zemeckis]]></realisator>
+  </film>
+</films>
+
